@@ -31,29 +31,42 @@ class _JsonParseState extends State<JsonParse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                child: const Text("Single Product"),
-                onPressed: () {
-                  singleParse();
-                  setState(() {});
-                }),
-            Text("ID: ${newProduct.id.toString()}"),
-            Text("Name: ${newProduct.name}"),
-            const SizedBox(height: 50),
-            ElevatedButton(
-                child: const Text("Multi Products"),
-                onPressed: () {
-                  multiParse();
-                  setState(() {});
-                }),
-            productsList.isNotEmpty
-                ? listViewWidget(productsList: productsList)
-                : const Text("List count 0")
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      "Json Parse Demo",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  ElevatedButton(
+                      child: const Text("Single Product"),
+                      onPressed: () {
+                        singleParse();
+                        setState(() {});
+                      }),
+                  Text("ID: ${newProduct.id.toString()}"),
+                  Text("Name: ${newProduct.name}"),
+                  const SizedBox(height: 50),
+                  ElevatedButton(
+                      child: const Text("Multi Products"),
+                      onPressed: () {
+                        multiParse();
+                        setState(() {});
+                      }),
+                ],
+              ),
+              productsList.isNotEmpty
+                  ? listViewWidget(productsList: productsList)
+                  : const Text("List count 0")
+            ],
+          ),
         ),
       ),
     );
@@ -70,10 +83,10 @@ class listViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 120.0, right: 20),
+    return Expanded(
+      flex: 1,
       child: SizedBox(
-        height: 500,
+        width: 15,
         child: ListView.builder(
           itemCount: productsList.length,
           itemBuilder: (context, index) {
